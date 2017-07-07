@@ -25,11 +25,22 @@ static struct proc_dir_entry *Igore_Proc_File;
 
 static int igore_proc_show(struct seq_file *m, void *v) 
 {
+	/* meminfo returns the number of pages.
+	 * For the memory size the pages need to
+	 * be multiplied by the mem_unit size (in bytes)
+	 * Then for kibibytes divide by 1024
+	 */ 
+	
+	int kibiscale;
 	struct sysinfo i;
 	si_meminfo(&i);
 	
+ 	kibiscale = i.mem_unit / 1024;
+
 	seq_printf(m, "Hi!\nGo cat yourself!\n");
-	seq_printf(m, "MemTotal: %lu\n", i.totalram);
+	seq_printf(m, "Mem Total: %lu KiB\n", i.totalram * kibiscale);
+	seq_printf(m, "Free RAM : %lu KiB\n", i.freeram * kibiscale);
+	seq_printf(m, "Page size: %d bytes\n", i.mem_unit);
 
 	return 0;
 }
