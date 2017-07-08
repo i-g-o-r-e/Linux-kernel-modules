@@ -11,9 +11,9 @@ $ cd src
 $ make
 ``` 
 ## Testing the module
-**WARNING** 
-The module has full access to the kernel and might crash your system. Try it at
-your own risk!
+**WARNING**
+
+The module has full access to the kernel and might crash your system. You have been warned!
 
 ### Loading module
 ```shell
